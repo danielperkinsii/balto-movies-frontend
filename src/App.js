@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import NewForm from './components/NewForm.js';
 import EditForm from './components/EditForm.js';
+import Search from './components/Search.js';
 
 const baseURL = 'http://localhost:8000'
 
@@ -30,7 +31,6 @@ class App extends React.Component {
     copyMovies.unshift(movie)
     this.setState({
       movies: copyMovies,
-    
     })
   }
 
@@ -103,6 +103,9 @@ class App extends React.Component {
           handleAddMovie={this.handleAddMovie}
           getMovieInfo={this.getMovieInfo}
           movies={this.state.movies}/> }
+        </div>
+        <div>
+          <Search />
         </div>
         <div className='movie'>
             {this.state.movies.map(movie => {
