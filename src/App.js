@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import NewForm from './components/NewForm.js';
 import EditForm from './components/EditForm.js';
-import Search from './components/Search.js';
 
 const baseURL = 'http://localhost:8000'
 
@@ -31,6 +30,7 @@ class App extends React.Component {
     copyMovies.unshift(movie)
     this.setState({
       movies: copyMovies,
+    
     })
   }
 
@@ -87,9 +87,29 @@ class App extends React.Component {
  render () {
   return (
     <div className="App">
-      {/* <button type='button' onClick={ () => this.getMovieInfo()}>Click to get Movies!</button> */}
-      <div>
-      {this.state.idOfMovieToEdit !== -1 ? 
+      <button type='button' onClick={ () => this.getMovieInfo()}>Click to get Movies!</button>
+      <table>
+        <tbody>
+            {this.state.movies.map(movie => {
+              return (
+                <tr key={movie.id}>
+                    <td>{movie.title}</td>
+                    <td>{movie.year}</td>
+                    <td>{movie.origin}</td>
+                    <td>{movie.director}</td>
+                    <td>{movie.cast}</td>
+                    <td>{movie.genre}</td>
+                    <td>{movie.wiki}</td>
+                    <td>{movie.plot}</td>
+                    <td onClick={()=>this.editMovie(movie)}>Edit</td>
+                    <td onClick={()=>this.deleteMovie(movie.id)}>Delete</td>
+                </tr>
+              )
+            })
+          }
+              </tbody>
+          </table>
+        {this.state.idOfMovieToEdit !== -1 ? 
         <EditForm 
           updateMovie={this.updateMovie} 
           handleChange={this.handleChange} 
@@ -103,30 +123,9 @@ class App extends React.Component {
           handleAddMovie={this.handleAddMovie}
           getMovieInfo={this.getMovieInfo}
           movies={this.state.movies}/> }
-        </div>
-        <div>
-          <Search />
-        </div>
-        <div className='movie'>
-            {this.state.movies.map(movie => {
-              return (
-                <div key={movie.id}>
-                    <h4>{movie.title}</h4>
-                    <div>{movie.year}</div>
-                    <div>{movie.origin}</div>
-                    <div><span className='bold'>Director:</span> {movie.director}</div>
-                    <div><span className='bold'>Cast:</span> {movie.cast}</div>
-                    <div>{movie.genre}</div>
-                    <div>{movie.wiki}</div>
-                    <div>{movie.plot}</div>
-                    <button onClick={()=>this.editMovie(movie)}>Edit</button>
-                    <button onClick={()=>this.deleteMovie(movie.id)}>Delete</button>
-                </div>
-              )
-            })
-          }
-              </div>
-          </div>
+      
+
+    </div>
   );
  }
 }

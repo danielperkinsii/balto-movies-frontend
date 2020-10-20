@@ -21,7 +21,6 @@ class EditForm extends React.Component {
     render () {
         return (
             <div>
-                <h2>Edit a Movie</h2>
                 <form onSubmit={(event)=>{this.props.updateMovie(event, this.state)}}>
 
                     {/* Title  */}
