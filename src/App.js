@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import NewForm from './components/NewForm.js';
 import EditForm from './components/EditForm.js';
 
@@ -63,7 +62,7 @@ class App extends React.Component {
   }
 
  updateMovie = (event, movie) => {
-  event.preventDefault()
+  event.prevendivefault()
   console.log('updated movie')
   console.log(movie)
   fetch(baseURL + '/movies/' + movie.id, {
@@ -80,7 +79,7 @@ class App extends React.Component {
   }).catch((err) => {console.log(err)})
  }
 
-  componentDidMount = () => {
+  componendividMount = () => {
       this.getMovieInfo()
     }
 
@@ -92,18 +91,18 @@ class App extends React.Component {
         <tbody>
             {this.state.movies.map(movie => {
               return (
-                <tr key={movie.id}>
-                    <td>{movie.title}</td>
-                    <td>{movie.year}</td>
-                    <td>{movie.origin}</td>
-                    <td>{movie.director}</td>
-                    <td>{movie.cast}</td>
-                    <td>{movie.genre}</td>
-                    <td>{movie.wiki}</td>
-                    <td>{movie.plot}</td>
-                    <td onClick={()=>this.editMovie(movie)}>Edit</td>
-                    <td onClick={()=>this.deleteMovie(movie.id)}>Delete</td>
-                </tr>
+                <div key={movie.id}>
+                    <div className="text-green-500">{movie.title}</div>
+                    <div>{movie.year}</div>
+                    <div>{movie.origin}</div>
+                    <div>{movie.director}</div>
+                    <div>{movie.cast}</div>
+                    <div>{movie.genre}</div>
+                    <a href={movie.wiki}>Wiki</a>
+                    <div>{movie.plot}</div>
+                    <div onClick={()=>this.editMovie(movie)}>Edit</div>
+                    <div onClick={()=>this.deleteMovie(movie.id)}>Delete</div>
+                </div>
               )
             })
           }
